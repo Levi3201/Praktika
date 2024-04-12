@@ -1,0 +1,14 @@
+@app.post("/register/")
+asaync def create_user(user: User):
+if validate_email(user.email):
+    if len(user.password) >= 6:
+        hash = hashlib.sha256(user.password.encode()).hexdigest()
+        new_user = UserModel(password=hash, email=user.email)
+        db.session.add(new.user)
+        db.session.commit()
+        db.session.close()
+        return {"message": "Success"}
+    else
+        return {"error": "Password is short"}
+else
+    return {"error": "Invalid email"}
